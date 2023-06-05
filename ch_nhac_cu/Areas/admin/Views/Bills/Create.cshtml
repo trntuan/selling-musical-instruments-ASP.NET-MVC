@@ -1,0 +1,296 @@
+﻿@model IEnumerable<ch_nhac_cu.Models.NhacCu>
+
+
+@{
+
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Page Header -->
+<div class="page-header">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3 class="page-title">Lập hóa đơn </h3>
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item" href="#"><a>Hóa đơn</a></li>
+                <li class="breadcrumb-item" href="#"><a>Lập lý đơn hàng</a></li>
+                <li class="breadcrumb-item active">Thêm hóa đơn</li>
+
+
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- /Page Header -->
+
+<div class="row">
+    <div class="col-sm-12">
+        <form>
+            <div class="row">
+                <div class="col-sm-6 col-md-3">
+                    <label for="exampleDataList" class="form-label">Tên khách hàng</label>
+                    <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Tên khách hàng">
+                    <datalist id="datalistOptions">
+                        <option value="Option 1"></option>
+                        <option value="Option 2"></option>
+                        <option value="Option 3"></option>
+                        <option value="Option 4"></option>
+
+                        <option value="Option 5"></option>
+                    </datalist>
+               
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <label for="exampleDataList" class="form-label">Số điện thoại</label>
+                    <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Số điện thoại">
+                    <datalist id="datalistOptions">
+                        <option value="Option 1"></option>
+                        <option value="Option 2"></option>
+                        <option value="Option 3"></option>
+                        <option value="Option 4"></option>
+                        <option value="Option 5"></option>
+                    </datalist>
+                </div>
+
+
+
+                <div class="col-sm-6 col-md-3">
+                    <label for="exampleDataList" class="form-label">Địa chỉ</label>
+                    <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Địa chỉ">
+                    <datalist id="datalistOptions">
+                        <option value="Option 1"></option>
+                        <option value="Option 2"></option>
+                        <option value="Option 3"></option>
+                        <option value="Option 4"></option>
+                        <option value="Option 5"></option>
+                    </datalist>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="form-group">
+                        <label>Mã hóa đơn</label>
+                        <div>
+                            <input class="form-control" readonly type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="form-group">
+                        <label>Tình trạng  </label>
+                        <select class="select">
+                            <option selected>Duyệt để giao</option>
+                            <option>Đã giao</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-6 col-md-3">
+                    <div class="form-group">
+                        <label>Ngày đặt</label>
+                        <div class="cal-icon">
+                            <input class="form-control datetimepicker" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="form-group">
+                        <label>Ngày giao</label>
+                        <div class="cal-icon">
+                            <input class="form-control datetimepicker" type="text">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="table-responsive">
+                        <table id="yourTable" class="table table-hover table-white">
+                            <thead>
+                                <tr>
+
+                                    <th style="width: 20px">#</th>
+                                    <th style="width:120px;">Mã mặt hàng</th>
+                                    <th>Tên mặt hàng</th>
+                                    <th>Đơn giá</th>
+                                    <th style="width:80px;">Số lượng</th>
+                                    <th style="width:120px;">Tổng</th>
+
+                                    <th><a href="javascript:void(0)" class="text-success font-18" title="Add"><i class="fa fa-plus"></i></a> </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-white">
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-right">Tổng số lượng</td>
+                                    <td style="text-align: right; padding-right: 30px;width: 230px">0</td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="5" class="text-right">
+                                        giảm giá %
+                                    </td>
+                                    <td style="text-align: right; padding-right: 30px;width: 230px">
+                                        <input class="form-control text-right" type="text">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" style="text-align: right; font-weight: bold">
+                                        Tổng tiền
+                                    </td>
+                                    <td style="text-align: right; padding-right: 30px; font-weight: bold; font-size: 16px;width: 230px">
+                                        $ 0.00
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="submit-section">
+                @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-secondary submit-btn m-r-10" })
+                <button class="btn btn-success submit-btn">Lập hóa đơn</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var table = document.querySelector("#yourTable");
+        var addBtn = document.querySelector("a[title='Add']");
+        var rowIndex = table.rows.length - 1;
+        var dataListId = 1;
+
+        addBtn.addEventListener("click", function () {
+            var row = table.insertRow(-1);
+            rowIndex++;
+
+            var cell1 = row.insertCell(0);
+            cell1.textContent = rowIndex;
+
+            var cell2 = row.insertCell(1);
+            var inputSearch = document.createElement("input");
+            inputSearch.setAttribute("style", "min-width:150px");
+            inputSearch.setAttribute("class", "form-control inputSearch");
+            inputSearch.setAttribute("name", "MaNC" + rowIndex);
+            inputSearch.setAttribute("list", "datalist" + dataListId);
+            cell2.appendChild(inputSearch);
+
+            var dataList = document.createElement("datalist");
+            dataList.setAttribute("id", "datalist" + dataListId);
+            cell2.appendChild(dataList);
+
+            @foreach (var hangHoa in Model)
+            {
+                <text>
+                    var option = document.createElement("option");
+                    option.value = "@hangHoa.MaNC";
+                    option.setAttribute("data-TenSP", "@hangHoa.TenNC");
+                    option.setAttribute("data-DonGia", "@hangHoa.DonGia");
+                    option.setAttribute("data-SoLuong", "@hangHoa.SoLuong");
+                    dataList.appendChild(option);
+                </text>
+            }
+
+            var cell3 = row.insertCell(2);
+            var selValue1 = document.createElement("input");
+            selValue1.setAttribute("class", "form-control selValue1");
+            selValue1.setAttribute("style", "min-width:150px");
+            selValue1.setAttribute("type", "text");
+            selValue1.setAttribute("readonly", "readonly");
+            selValue1.setAttribute("name", "TenNC" + rowIndex);
+            cell3.appendChild(selValue1);
+
+            var cell4 = row.insertCell(3);
+            var selValue2 = document.createElement("input");
+            selValue2.setAttribute("class", "form-control selValue2");
+            selValue2.setAttribute("readonly", "readonly");
+            selValue2.setAttribute("type", "text");
+            selValue2.setAttribute("style", "width: 120px");
+            selValue2.setAttribute("name", "DonGia" + rowIndex);
+            cell4.appendChild(selValue2);
+
+            var cell5 = row.insertCell(4);
+            var inputQuantity = document.createElement("input");
+            inputQuantity.setAttribute("class", "form-control");
+            inputQuantity.setAttribute("style", "width:80px");
+            inputQuantity.setAttribute("type", "number");
+            inputQuantity.setAttribute("name", "SoLuong" + rowIndex);
+            cell5.appendChild(inputQuantity);
+
+            var cell6 = row.insertCell(5);
+            var inputTotal = document.createElement("input");
+            inputTotal.setAttribute("class", "form-control");
+            inputTotal.setAttribute("readonly", "readonly");
+            inputTotal.setAttribute("type", "text");
+            inputTotal.setAttribute("name", "Tong" + rowIndex);
+            cell6.appendChild(inputTotal);
+
+            var cell7 = row.insertCell(6);
+            var removeLink = document.createElement("a");
+            removeLink.setAttribute("href", "javascript:void(0)");
+            removeLink.setAttribute("class", "text-danger font-18 removeRowremoveRow");
+            removeLink.setAttribute("title", "Remove");
+            var removeIcon = document.createElement("i");
+            removeIcon.setAttribute("class", "fa fa-trash-o");
+            removeLink.appendChild(removeIcon);
+            cell7.appendChild(removeLink);
+
+          inputSearch.addEventListener("input", function () {
+                updateValues(inputSearch, selValue1, selValue2);
+            });
+
+            inputSearch.addEventListener("change", function () {
+                if (inputSearch.value === "") {
+                    selValue1.value = "";
+                    selValue2.value = "";
+                }
+            });
+
+            removeLink.addEventListener("click", function () {
+                table.deleteRow(this.parentNode.parentNode.rowIndex);
+            });
+
+            dataListId++;
+        });
+
+        function validateQuantity(inputQuantity, selValue2) {
+            var quantity = inputQuantity.value;
+            var soLuong = selValue2.getAttribute("data-SoLuong");
+
+            if (quantity && parseInt(quantity) >= parseInt(soLuong)) {
+                // Xử lý khi giá trị cell5 không hợp lệ
+                alert("Số lượng phải nhỏ hơn giới hạn!");
+                inputQuantity.value = ""; // Xóa giá trị không hợp lệ trong cell5
+            }
+        }
+
+        function updateValues(inputSearch, selValue1, selValue2) {
+            var searchText = inputSearch.value.toLowerCase();
+            var matchingOption = Array.from(document.querySelectorAll("datalist option")).find(function (option) {
+                return option.value.toLowerCase() === searchText;
+            });
+
+            if (matchingOption) {
+                selValue1.value = matchingOption.getAttribute("data-TenSP");
+                selValue2.value = matchingOption.getAttribute("data-DonGia");
+                validateQuantity(inputSearch.parentNode.nextElementSibling.querySelector("input"), selValue2);
+            } else {
+                selValue1.value = "";
+                selValue2.value = "";
+            }
+        }
+    });
+</script>

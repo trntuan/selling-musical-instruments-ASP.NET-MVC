@@ -1,0 +1,242 @@
+﻿@model IEnumerable<ch_nhac_cu.Models.NhacCu>
+@{
+    ViewBag.Title = "TimKiemNhacCu";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+
+<script src="~/Content/userAssets/js/paginate.js"></script>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+@{
+    var DSLoai = Session["DSLoaiNhac"] as List<ch_nhac_cu.Models.LoaiNhacCu>;
+    if (DSLoai != null)
+    {
+        // Sử dụng danh sách
+        ViewBag.DSLoai = DSLoai;
+    }
+}
+<!-- Breadcrumb Start -->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="breadcrumb bg-light mb-30">
+                <a class="breadcrumb-item text-dark" href="#">Trang chủ</a>
+                <span class="breadcrumb-item active">Sản phẩm</span>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+<!-- Shop Start -->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <!-- Shop Sidebar Start -->
+        <div class="col-lg-3 col-md-4">
+            <!-- Price Start -->
+            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Tìm kiếm nâng cao</span></h5>
+            <div class="bg-light p-4 mb-30  ">
+                <form method="get" action="@Url.Action("TimKiemNhacCu", "Category")">
+                    <div class="form-group mb-4">
+                        <h6 class="text-dark">Tìm kiếm theo tên</h6>
+
+                        <input name="TenNC" value="@ViewBag.TenNC" class="form-control" placeholder="Nhập tên sản phẩm...">
+
+                    </div>
+                    @if (ViewBag.DSLoai != null)
+                    {
+
+
+                        <div class="form-group mb-4">
+                            <h6 class="text-dark">Tìm kiếm theo loại</h6>
+                            <select name="MaLoaiNC" class="form-control">
+                                <option value="">Tất cả</option>
+                                @foreach (var item in ViewBag.DSLoai)
+                                {
+                                    if (item.MaLoaiNC != null && item.TenLoaiNC != null)
+                                    {
+                                        <option value="@item.MaLoaiNC">@item.TenLoaiNC</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+
+                    }
+                    <div class="form-group mb-4">
+                        <h6 class="text-dark">Tìm kiếm theo giá</h6>
+                        <div class="form-group">
+                            <label for="priceFrom">Giá từ:</label>
+                            <input name="DonGiaMin" value="@ViewBag.DonGiaMin" type="number" class="form-control" id="priceFrom" placeholder="Nhập giá từ...">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="priceTo">Giá đến:</label>
+                            <input name="DonGiaMax" value="@ViewBag.DonGiaMax" type="number" class="form-control" id="priceTo" placeholder="Nhập giá đến...">
+                        </div>
+                    </div>
+
+                    <div class="input-group-append">
+
+                        <input type="submit" value="tìm kiếm" class="btn btn btn-primary w-25y" wfd-id="id3">
+
+
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+        <!-- Shop Sidebar End -->
+        <!-- Shop Product Start -->
+        <div class="col-lg-9 col-md-8">
+            <div>
+                <div class="row pb-3">
+                    <div class="col-12 pb-1">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <div>
+
+                            </div>
+                            <div class="ml-2">
+
+                                <div id="group-pading" class="btn-group ml-2">
+                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Hiển thị</button>
+                                    <div class="dropdown-menu-content dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#">5</a>
+                                        <a class="dropdown-item" href="#">10</a>
+                                        <a class="dropdown-item" href="#">20</a>
+                                        <a class="dropdown-item" href="#">30</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-pading">
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+                                <div class="product-item bg-light mb-4">
+                                    <div class="product-img position-relative item-height overflow-hidden">
+                                        <img class="img-fluid w-100 h-100" src="~/Content/assets/img/NhacCu/@item.AnhNC" alt="">
+                                        <div class="product-action">
+                                            <a class="btn btn-outline-dark btn-square add-to-cart-btn" href="#" data-product-id="@item.MaNC"><i class="fa fa-shopping-cart"></i></a>
+                                            <a class="btn btn-outline-dark btn-square" href="@Url.Action("Details", "Product", new { Id = item.MaNC })"><i class="fa fa-search"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="text-center item-height-160 py-4">
+                                        <a class="h6 text-decoration-none " href="@Url.Action("Details", "Product", new { Id = item.MaNC })">@item.TenNC</a>
+                                        <div class="d-flex align-items-center justify-content-center mt-2">
+                                            <h5 class="text-danger"> @item.DonGia.ToString("#,##0") đ</h5><h6 class="text-muted ml-2"><del> @{ decimal Gia = item.DonGia * 1.1M;} @Gia.ToString("#,##0") đ</del></h6>
+                                        </div>
+                                        @*<div class="d-flex align-items-center justify-content-center mb-1">
+                                            <small>Còn lại @item.SoLuong sản phẩm</small>
+                                        </div>*@
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="col-12">
+                        <nav>
+                            <ul id="pagination" class="pagination justify-content-center">
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Shop Product End -->
+    </div>
+</div>
+<!-- Shop End -->
+<script>
+    $(document).ready(function () {
+        var itemsPerPage = 10; // Số mục hiển thị ban đầu trên mỗi trang
+        var currentPage = 1; // Trang hiện tại
+        var maxVisiblePages = 5; // Số lượng trang hiển thị trên thanh phân trang
+        var totalItems = $('.row-pading > div').length; // Tổng số mục trong danh sách
+        var totalPages = Math.ceil(totalItems / itemsPerPage); // Tổng số trang
+
+        // Ẩn tất cả các mục
+        $('.row-pading > div').hide();
+
+        // Hiển thị các mục đầu tiên
+        $('.row-pading > div').slice(0, itemsPerPage).show();
+
+        // Tạo nút phân trang ban đầu
+        updatePagination();
+
+        // Xử lý sự kiện khi người dùng chọn trang
+        $('.pagination').on('click', 'a', function (e) {
+            e.preventDefault();
+
+            if ($(this).attr('aria-label') === 'Previous') {
+                if (currentPage > 1) {
+                    currentPage--;
+                }
+            }
+            else if ($(this).attr('aria-label') === 'Next') {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                }
+            }
+            else {
+                currentPage = parseInt($(this).text());
+            }
+
+            var startIndex = (currentPage - 1) * itemsPerPage;
+            var endIndex = startIndex + itemsPerPage;
+
+            $('.row-pading > div').hide();
+            $('.row-pading > div').slice(startIndex, endIndex).show();
+
+            updatePagination();
+        });
+
+        // Cập nhật nút phân trang
+        function updatePagination() {
+            $('.pagination').empty();
+
+            var previousBtn = '<li class="page-item"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
+            if (currentPage === 1) {
+                previousBtn = '<li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
+            }
+            $('.pagination').append(previousBtn);
+
+            var startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+            var endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+            for (var i = startPage; i <= endPage; i++) {
+                var pageBtn = '<li class="page-item';
+                if (i === currentPage) {
+                    pageBtn += ' active';
+                }
+                pageBtn += '"><a class="page-link" href="#">' + i + '</a></li>';
+                $('.pagination').append(pageBtn);
+            }
+
+            var nextBtn = '<li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
+            if (currentPage === totalPages) {
+                nextBtn = '<li class="page-item disabled"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
+            }
+            $('.pagination').append(nextBtn);
+        }
+
+        // Xử lý sự kiện khi người dùng chọn số lượng sản phẩm trên mỗi trang
+        $('.dropdown-menu-content').on('click', '.dropdown-item', function (e) {
+            e.preventDefault();
+
+            itemsPerPage = parseInt($(this).text());
+
+            totalPages = Math.ceil(totalItems / itemsPerPage);
+            currentPage = 1;
+
+            $('.row-pading > div').hide();
+            $('.row-pading > div').slice(0, itemsPerPage).show();
+
+            updatePagination();
+        });
+    });
+</script>

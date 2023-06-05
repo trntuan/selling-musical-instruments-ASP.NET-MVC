@@ -1,0 +1,94 @@
+﻿@model IEnumerable<ch_nhac_cu.Models.LoaiNhacCu>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+    int i = 0;
+}
+
+<!-- Page Header -->
+@using (Html.BeginForm("Index", "LoaiNhacCus", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Loại nhạc cụ</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Sản phẩm</a></li>
+                    <li class="breadcrumb-item active">Loại nhạc cụ</li>
+                </ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <a href="@Url.Action("Create", "LoaiNhacCus")" class="btn add-btn"><i class="fa fa-plus"></i> Thêm loại nhạc cụ</a>
+            </div>
+        </div>
+    </div>
+    <div class="row filter-row justify-content-center ">
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12">
+            <div class="form-group form-focus">
+                <input type="text" class="form-control floating" name="MaLoaiNC" value="@ViewBag.MaLoaiNC">
+                <label class="focus-label">Mã loại nhạc cụ</label>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12">
+            <div class="form-group form-focus">
+                <input type="text" class="form-control floating" name="TenLoaiNC" value="@ViewBag.TenLoaiNC">
+                <label class="focus-label">Tên loại nhạc cụ</label>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
+            <input type="submit" name="submit" value="Tìm kiếm" class="btn btn-success btn-block" />
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
+            <a href="@Url.Action("Index", "LoaiNhacCus/Index")" class="btn btn-info btn-block"> Nhập mới </a>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-striped custom-table datatable mb-0">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã loại nhạc cụ</th>
+                            <th>Tên loại nhạc cụ</th>
+                            <th class="underload text-center">Ảnh loại nhạc cụ</th>
+                            <th class="text-right no-sort underload">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @{ i++;}
+                                    @i
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MaLoaiNC)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TenLoaiNC)
+                                </td>
+                                <td class="text-center">
+                                    <img style="border-radius:14%; width: 18%; height: auto" src="~/Content/assets/img/LoaiNC/@item.AnhLoaiNC" class="border border-light" alt="your image">
+                                </td>
+                                <td class="text-right">
+                                    <div class="dropdown dropdown-action">
+                                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="@Url.Action("Edit", new { id = item.MaLoaiNC })"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                            <a class="dropdown-item" href="@Url.Action("Details", new { id = item.MaLoaiNC })"><i class="fa fa-eye m-r-5"></i> View</a>
+                                            <a class="dropdown-item" href="@Url.Action("Delete", new { id = item.MaLoaiNC })"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+ }

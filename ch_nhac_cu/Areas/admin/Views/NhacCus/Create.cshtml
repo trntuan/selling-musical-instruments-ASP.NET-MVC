@@ -1,0 +1,125 @@
+﻿@model ch_nhac_cu.Models.NhacCu
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+@using (Html.BeginForm("Create", "NhacCus", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="modal-content">
+        <div class="modal-header justify-content-center">
+            <h4 class="modal-title"><b>THÊM NHẠC CỤ</b></h4>
+
+        </div>
+        <div class="modal-body">
+            <div class="form">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @*@Html.TextBox("MaNC", null, new { id = "MaNC", @readonly = "readonly" })*@
+                            @Html.LabelFor(model => model.MaNC, "Mã nhạc cụ", htmlAttributes: new { @class = "" })
+                            @Html.EditorFor(model => model.MaNC, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.MaNC, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.TenNC, "Tên nhạc cụ", htmlAttributes: new { @class = "" })
+                            @Html.EditorFor(model => model.TenNC, new { htmlAttributes = new { @class = "form-control"@*, required="required"*@ } })
+                            @Html.ValidationMessageFor(model => model.TenNC, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SoLuong, "Số lượng", htmlAttributes: new { @class = "" })
+                            @Html.EditorFor(model => model.SoLuong, new { htmlAttributes = new { @class = "form-control"@*, required = "required"*@ } })
+                            @Html.ValidationMessageFor(model => model.SoLuong, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.DonGia, "Đơn giá", htmlAttributes: new { @class = "" })
+                            @Html.EditorFor(model => model.DonGia, new { htmlAttributes = new { @class = "form-control"@*, required = "required"*@ } })
+                            @Html.ValidationMessageFor(model => model.DonGia, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ThoiGianBaoHanh, "Thời gian bảo hành", htmlAttributes: new { @class = "" })
+                            @Html.EditorFor(model => model.ThoiGianBaoHanh, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ThoiGianBaoHanh, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MaLoaiNC, "Loại nhạc cụ", htmlAttributes: new { @class = "" })
+                            @*@Html.DropDownList("MaLoaiNC", null, htmlAttributes: new { @class = "form-control select" })*@
+                            @Html.DropDownListFor(model => model.MaLoaiNC, ViewBag.MaLoaiNC as SelectList, new { @class = "form-control select", id = "MaLoaiNC" })
+                            @Html.ValidationMessageFor(model => model.MaLoaiNC, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MaNCC, "Nhà cung cấp", htmlAttributes: new { @class = "" })
+                            @Html.DropDownList("MaNCC", null, htmlAttributes: new { @class = "form-control select" })
+                            @Html.ValidationMessageFor(model => model.MaNCC, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AnhNC, htmlAttributes: new { @class = "" })
+                            <input type="file" class="form-control" name="AnhNC" accept="image/*" required>
+                            @Html.ValidationMessageFor(model => model.AnhNC, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MaHSX, "Hãng sản xuất", htmlAttributes: new { @class = "" })
+                            @Html.DropDownList("MaHSX", null, htmlAttributes: new { @class = "form-control select" })
+                            @Html.ValidationMessageFor(model => model.MaHSX, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MoTa, "Mô tả", htmlAttributes: new { @class = "" })
+                            @Html.TextArea("MoTa", "", 4, 10, new { @class = "form-control", placeholder = "Enter text"@*,  required = "required"*@ })
+                            @Html.ValidationMessageFor(model => model.MoTa, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="submit-section">
+                    @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-secondary submit-btn m-r-10" })
+                    <input type="submit" value="Thêm" class="btn btn-success submit-btn" />
+                </div>
+            </div>
+        </div>
+    </div>
+    @section Scripts {
+        <script>
+        $(document).ready(function () {
+            $("#MaLoaiNC").change(function () { // Gọi hàm khi giá trị trong dropdown list thay đổi
+                var loaiNC = $(this).val(); // Lấy giá trị loại nhạc cụ đã chọn
+                var url = "@Url.Action("GenerateMaNhacCu", "NhacCus")";
+
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    dataType: "json",
+                    data: { LoaiNC: loaiNC },
+                    success: function (data) {
+                        $("#MaNC").val(data); // Gán giá trị mã nhạc cụ vào thẻ input có id là "MaNC"
+
+                    }
+                });
+            });
+        });
+        </script>
+    }
+}

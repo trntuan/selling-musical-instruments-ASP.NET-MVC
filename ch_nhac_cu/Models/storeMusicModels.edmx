@@ -1,0 +1,798 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="QLCHNCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ChucVu">
+          <Key>
+            <PropertyRef Name="MaCV" />
+          </Key>
+          <Property Name="MaCV" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TenCV" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CTHoaDon">
+          <Key>
+            <PropertyRef Name="MaHD" />
+            <PropertyRef Name="MaNC" />
+          </Key>
+          <Property Name="MaHD" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaNC" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="SoLuongBan" Type="int" Nullable="false" />
+          <Property Name="DonGiaBan" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HangSanXuat">
+          <Key>
+            <PropertyRef Name="MaHSX" />
+          </Key>
+          <Property Name="MaHSX" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TenHSX" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="SDT" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HoaDon">
+          <Key>
+            <PropertyRef Name="MaHD" />
+          </Key>
+          <Property Name="MaHD" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NgayDH" Type="date" Nullable="false" />
+          <Property Name="NgayGH" Type="date" />
+          <Property Name="MaKH" Type="varchar" MaxLength="10" />
+          <Property Name="MaNV" Type="varchar" MaxLength="10" />
+          <Property Name="TongTien" Type="int" />
+          <Property Name="TinhTrangDuyet" Type="bit" Nullable="false" />
+          <Property Name="TinhTrangDonHang" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KhachHang">
+          <Key>
+            <PropertyRef Name="MaKH" />
+          </Key>
+          <Property Name="MaKH" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="HoTenKH" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SDT" Type="varchar" MaxLength="10" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="500" />
+          <Property Name="TaiKhoan" Type="varchar" MaxLength="30" />
+          <Property Name="MatKhau" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="AnhKH" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="LoaiNhacCu">
+          <Key>
+            <PropertyRef Name="MaLoaiNC" />
+          </Key>
+          <Property Name="MaLoaiNC" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TenLoaiNC" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AnhLoaiNC" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="NhacCu">
+          <Key>
+            <PropertyRef Name="MaNC" />
+          </Key>
+          <Property Name="MaNC" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TenNC" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MoTa" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="AnhNC" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SoLuong" Type="int" Nullable="false" />
+          <Property Name="ThoiGianBaoHanh" Type="nvarchar" MaxLength="50" />
+          <Property Name="DonGia" Type="int" Nullable="false" />
+          <Property Name="MaLoaiNC" Type="varchar" MaxLength="10" />
+          <Property Name="MaNCC" Type="varchar" MaxLength="10" />
+          <Property Name="MaHSX" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="NhaCungCap">
+          <Key>
+            <PropertyRef Name="MaNCC" />
+          </Key>
+          <Property Name="MaNCC" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TenNCC" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SDT" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="NhanVien">
+          <Key>
+            <PropertyRef Name="MaNV" />
+          </Key>
+          <Property Name="MaNV" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="HoTenNV" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SDT" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="TenDN" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="MatKhau" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="MaCV" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="ThamSo">
+          <Key>
+            <PropertyRef Name="MaTS" />
+          </Key>
+          <Property Name="MaTS" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TenTS" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DVT" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="GiaTri" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="TrangThai" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__CTHoaDon__MaHD__398D8EEE">
+          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="1" />
+          <End Role="CTHoaDon" Type="Self.CTHoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HoaDon">
+              <PropertyRef Name="MaHD" />
+            </Principal>
+            <Dependent Role="CTHoaDon">
+              <PropertyRef Name="MaHD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CTHoaDon__MaNC__3A81B327">
+          <End Role="NhacCu" Type="Self.NhacCu" Multiplicity="1" />
+          <End Role="CTHoaDon" Type="Self.CTHoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhacCu">
+              <PropertyRef Name="MaNC" />
+            </Principal>
+            <Dependent Role="CTHoaDon">
+              <PropertyRef Name="MaNC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HoaDon__MaKH__35BCFE0A">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="HoaDon">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HoaDon__MaNV__36B12243">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
+          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="HoaDon">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NhacCu__MaHSX__2B3F6F97">
+          <End Role="HangSanXuat" Type="Self.HangSanXuat" Multiplicity="0..1" />
+          <End Role="NhacCu" Type="Self.NhacCu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HangSanXuat">
+              <PropertyRef Name="MaHSX" />
+            </Principal>
+            <Dependent Role="NhacCu">
+              <PropertyRef Name="MaHSX" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NhacCu__MaLoaiNC__29572725">
+          <End Role="LoaiNhacCu" Type="Self.LoaiNhacCu" Multiplicity="0..1" />
+          <End Role="NhacCu" Type="Self.NhacCu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiNhacCu">
+              <PropertyRef Name="MaLoaiNC" />
+            </Principal>
+            <Dependent Role="NhacCu">
+              <PropertyRef Name="MaLoaiNC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NhacCu__MaNCC__2A4B4B5E">
+          <End Role="NhaCungCap" Type="Self.NhaCungCap" Multiplicity="0..1" />
+          <End Role="NhacCu" Type="Self.NhacCu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhaCungCap">
+              <PropertyRef Name="MaNCC" />
+            </Principal>
+            <Dependent Role="NhacCu">
+              <PropertyRef Name="MaNCC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NhanVien__MaCV__300424B4">
+          <End Role="ChucVu" Type="Self.ChucVu" Multiplicity="0..1" />
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChucVu">
+              <PropertyRef Name="MaCV" />
+            </Principal>
+            <Dependent Role="NhanVien">
+              <PropertyRef Name="MaCV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetSalesReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FromDate" Type="date" Mode="In" />
+          <Parameter Name="ToDate" Type="date" Mode="In" />
+        </Function>
+        <Function Name="HangSanXuat_TimKiem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaHSX" Type="varchar" Mode="In" />
+          <Parameter Name="TenHSX" Type="nvarchar" Mode="In" />
+          <Parameter Name="DiaChi" Type="nvarchar" Mode="In" />
+          <Parameter Name="SDT" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="KhachHang_TimKiem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaKH" Type="varchar" Mode="In" />
+          <Parameter Name="HoTenKH" Type="nvarchar" Mode="In" />
+          <Parameter Name="SDT" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="DiaChi" Type="nvarchar" Mode="In" />
+          <Parameter Name="TaiKhoan" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="LoaiNhacCu_TimKiem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaLoaiNC" Type="varchar" Mode="In" />
+          <Parameter Name="TenLoaiNC" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="NhacCu_TimKiem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaNC" Type="varchar" Mode="In" />
+          <Parameter Name="TenNC" Type="nvarchar" Mode="In" />
+          <Parameter Name="ThoiGianBaoHanh" Type="nvarchar" Mode="In" />
+          <Parameter Name="DonGiaMin" Type="varchar" Mode="In" />
+          <Parameter Name="DonGiaMax" Type="varchar" Mode="In" />
+          <Parameter Name="MaLoaiNC" Type="nvarchar" Mode="In" />
+          <Parameter Name="MaNCC" Type="nvarchar" Mode="In" />
+          <Parameter Name="MaHSX" Type="nvarchar" Mode="In" />
+          <Parameter Name="SoLuong" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="NhaCungCap_TimKiem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaNCC" Type="varchar" Mode="In" />
+          <Parameter Name="TenNCC" Type="nvarchar" Mode="In" />
+          <Parameter Name="SDT" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="DiaChi" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="NhanVien_TimKiem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaNV" Type="varchar" Mode="In" />
+          <Parameter Name="HoTenNV" Type="nvarchar" Mode="In" />
+          <Parameter Name="SDT" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="DiaChi" Type="nvarchar" Mode="In" />
+          <Parameter Name="TenDN" Type="nvarchar" Mode="In" />
+          <Parameter Name="MaCV" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="QLCHNCModelStoreContainer">
+          <EntitySet Name="ChucVu" EntityType="Self.ChucVu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CTHoaDon" EntityType="Self.CTHoaDon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HangSanXuat" EntityType="Self.HangSanXuat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HoaDon" EntityType="Self.HoaDon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoaiNhacCu" EntityType="Self.LoaiNhacCu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NhacCu" EntityType="Self.NhacCu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NhaCungCap" EntityType="Self.NhaCungCap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ThamSo" EntityType="Self.ThamSo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CTHoaDon__MaHD__398D8EEE" Association="Self.FK__CTHoaDon__MaHD__398D8EEE">
+            <End Role="HoaDon" EntitySet="HoaDon" />
+            <End Role="CTHoaDon" EntitySet="CTHoaDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CTHoaDon__MaNC__3A81B327" Association="Self.FK__CTHoaDon__MaNC__3A81B327">
+            <End Role="NhacCu" EntitySet="NhacCu" />
+            <End Role="CTHoaDon" EntitySet="CTHoaDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HoaDon__MaKH__35BCFE0A" Association="Self.FK__HoaDon__MaKH__35BCFE0A">
+            <End Role="KhachHang" EntitySet="KhachHang" />
+            <End Role="HoaDon" EntitySet="HoaDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HoaDon__MaNV__36B12243" Association="Self.FK__HoaDon__MaNV__36B12243">
+            <End Role="NhanVien" EntitySet="NhanVien" />
+            <End Role="HoaDon" EntitySet="HoaDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NhacCu__MaHSX__2B3F6F97" Association="Self.FK__NhacCu__MaHSX__2B3F6F97">
+            <End Role="HangSanXuat" EntitySet="HangSanXuat" />
+            <End Role="NhacCu" EntitySet="NhacCu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NhacCu__MaLoaiNC__29572725" Association="Self.FK__NhacCu__MaLoaiNC__29572725">
+            <End Role="LoaiNhacCu" EntitySet="LoaiNhacCu" />
+            <End Role="NhacCu" EntitySet="NhacCu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NhacCu__MaNCC__2A4B4B5E" Association="Self.FK__NhacCu__MaNCC__2A4B4B5E">
+            <End Role="NhaCungCap" EntitySet="NhaCungCap" />
+            <End Role="NhacCu" EntitySet="NhacCu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NhanVien__MaCV__300424B4" Association="Self.FK__NhanVien__MaCV__300424B4">
+            <End Role="ChucVu" EntitySet="ChucVu" />
+            <End Role="NhanVien" EntitySet="NhanVien" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QLCHNCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ChucVu">
+          <Key>
+            <PropertyRef Name="MaCV" />
+          </Key>
+          <Property Name="MaCV" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TenCV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="NhanViens" Relationship="Self.FK__NhanVien__MaCV__30F848ED" FromRole="ChucVu" ToRole="NhanVien" />
+        </EntityType>
+        <EntityType Name="CTHoaDon">
+          <Key>
+            <PropertyRef Name="MaHD" />
+            <PropertyRef Name="MaNC" />
+          </Key>
+          <Property Name="MaHD" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MaNC" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SoLuongBan" Type="Int32" Nullable="false" />
+          <Property Name="DonGiaBan" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="HoaDon" Relationship="Self.FK__CTHoaDon__MaHD__3A81B327" FromRole="CTHoaDon" ToRole="HoaDon" />
+          <NavigationProperty Name="NhacCu" Relationship="Self.FK__CTHoaDon__MaNC__3B75D760" FromRole="CTHoaDon" ToRole="NhacCu" />
+        </EntityType>
+        <EntityType Name="HangSanXuat">
+          <Key>
+            <PropertyRef Name="MaHSX" />
+          </Key>
+          <Property Name="MaHSX" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TenHSX" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DiaChi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SDT" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="NhacCus" Relationship="Self.FK__NhacCu__MaHSX__2C3393D0" FromRole="HangSanXuat" ToRole="NhacCu" />
+        </EntityType>
+        <EntityType Name="HoaDon">
+          <Key>
+            <PropertyRef Name="MaHD" />
+          </Key>
+          <Property Name="MaHD" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NgayDH" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="NgayGH" Type="DateTime" Precision="0" />
+          <Property Name="MaKH" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MaNV" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TinhTrangDuyet" Type="Boolean" Nullable="false" />
+          <Property Name="TinhTrangDonHang" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CTHoaDons" Relationship="Self.FK__CTHoaDon__MaHD__3A81B327" FromRole="HoaDon" ToRole="CTHoaDon" />
+          <NavigationProperty Name="KhachHang" Relationship="Self.FK__HoaDon__MaKH__36B12243" FromRole="HoaDon" ToRole="KhachHang" />
+          <NavigationProperty Name="NhanVien" Relationship="Self.FK__HoaDon__MaNV__37A5467C" FromRole="HoaDon" ToRole="NhanVien" />
+          <Property Name="TongTien" Type="Int32" />
+        </EntityType>
+        <EntityType Name="KhachHang">
+          <Key>
+            <PropertyRef Name="MaKH" />
+          </Key>
+          <Property Name="MaKH" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HoTenKH" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SDT" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DiaChi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="TaiKhoan" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="MatKhau" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AnhKH" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HoaDons" Relationship="Self.FK__HoaDon__MaKH__36B12243" FromRole="KhachHang" ToRole="HoaDon" />
+        </EntityType>
+        <EntityType Name="LoaiNhacCu">
+          <Key>
+            <PropertyRef Name="MaLoaiNC" />
+          </Key>
+          <Property Name="MaLoaiNC" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TenLoaiNC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="NhacCus" Relationship="Self.FK__NhacCu__MaLoaiNC__2A4B4B5E" FromRole="LoaiNhacCu" ToRole="NhacCu" />
+          <Property Name="AnhLoaiNC" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="NhacCu">
+          <Key>
+            <PropertyRef Name="MaNC" />
+          </Key>
+          <Property Name="MaNC" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TenNC" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MoTa" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AnhNC" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SoLuong" Type="Int32" Nullable="false" />
+          <Property Name="ThoiGianBaoHanh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DonGia" Type="Int32" Nullable="false" />
+          <Property Name="MaLoaiNC" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MaNCC" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MaHSX" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CTHoaDons" Relationship="Self.FK__CTHoaDon__MaNC__3B75D760" FromRole="NhacCu" ToRole="CTHoaDon" />
+          <NavigationProperty Name="HangSanXuat" Relationship="Self.FK__NhacCu__MaHSX__2C3393D0" FromRole="NhacCu" ToRole="HangSanXuat" />
+          <NavigationProperty Name="LoaiNhacCu" Relationship="Self.FK__NhacCu__MaLoaiNC__2A4B4B5E" FromRole="NhacCu" ToRole="LoaiNhacCu" />
+          <NavigationProperty Name="NhaCungCap" Relationship="Self.FK__NhacCu__MaNCC__2B3F6F97" FromRole="NhacCu" ToRole="NhaCungCap" />
+        </EntityType>
+        <EntityType Name="NhaCungCap">
+          <Key>
+            <PropertyRef Name="MaNCC" />
+          </Key>
+          <Property Name="MaNCC" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TenNCC" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SDT" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DiaChi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="NhacCus" Relationship="Self.FK__NhacCu__MaNCC__2B3F6F97" FromRole="NhaCungCap" ToRole="NhacCu" />
+        </EntityType>
+        <EntityType Name="NhanVien">
+          <Key>
+            <PropertyRef Name="MaNV" />
+          </Key>
+          <Property Name="MaNV" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HoTenNV" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SDT" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DiaChi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenDN" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MatKhau" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MaCV" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ChucVu" Relationship="Self.FK__NhanVien__MaCV__30F848ED" FromRole="NhanVien" ToRole="ChucVu" />
+          <NavigationProperty Name="HoaDons" Relationship="Self.FK__HoaDon__MaNV__37A5467C" FromRole="NhanVien" ToRole="HoaDon" />
+        </EntityType>
+        <EntityType Name="ThamSo">
+          <Key>
+            <PropertyRef Name="MaTS" />
+          </Key>
+          <Property Name="MaTS" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TenTS" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DVT" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GiaTri" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TrangThai" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__NhanVien__MaCV__30F848ED">
+          <End Role="ChucVu" Type="Self.ChucVu" Multiplicity="0..1" />
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChucVu">
+              <PropertyRef Name="MaCV" />
+            </Principal>
+            <Dependent Role="NhanVien">
+              <PropertyRef Name="MaCV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CTHoaDon__MaHD__3A81B327">
+          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="1" />
+          <End Role="CTHoaDon" Type="Self.CTHoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HoaDon">
+              <PropertyRef Name="MaHD" />
+            </Principal>
+            <Dependent Role="CTHoaDon">
+              <PropertyRef Name="MaHD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CTHoaDon__MaNC__3B75D760">
+          <End Role="NhacCu" Type="Self.NhacCu" Multiplicity="1" />
+          <End Role="CTHoaDon" Type="Self.CTHoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhacCu">
+              <PropertyRef Name="MaNC" />
+            </Principal>
+            <Dependent Role="CTHoaDon">
+              <PropertyRef Name="MaNC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NhacCu__MaHSX__2C3393D0">
+          <End Role="HangSanXuat" Type="Self.HangSanXuat" Multiplicity="0..1" />
+          <End Role="NhacCu" Type="Self.NhacCu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HangSanXuat">
+              <PropertyRef Name="MaHSX" />
+            </Principal>
+            <Dependent Role="NhacCu">
+              <PropertyRef Name="MaHSX" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HoaDon__MaKH__36B12243">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="HoaDon">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HoaDon__MaNV__37A5467C">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
+          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="HoaDon">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NhacCu__MaLoaiNC__2A4B4B5E">
+          <End Role="LoaiNhacCu" Type="Self.LoaiNhacCu" Multiplicity="0..1" />
+          <End Role="NhacCu" Type="Self.NhacCu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiNhacCu">
+              <PropertyRef Name="MaLoaiNC" />
+            </Principal>
+            <Dependent Role="NhacCu">
+              <PropertyRef Name="MaLoaiNC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NhacCu__MaNCC__2B3F6F97">
+          <End Role="NhaCungCap" Type="Self.NhaCungCap" Multiplicity="0..1" />
+          <End Role="NhacCu" Type="Self.NhacCu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhaCungCap">
+              <PropertyRef Name="MaNCC" />
+            </Principal>
+            <Dependent Role="NhacCu">
+              <PropertyRef Name="MaNCC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLCHNCEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ChucVus" EntityType="Self.ChucVu" />
+          <EntitySet Name="CTHoaDons" EntityType="Self.CTHoaDon" />
+          <EntitySet Name="HangSanXuats" EntityType="Self.HangSanXuat" />
+          <EntitySet Name="HoaDons" EntityType="Self.HoaDon" />
+          <EntitySet Name="KhachHangs" EntityType="Self.KhachHang" />
+          <EntitySet Name="LoaiNhacCus" EntityType="Self.LoaiNhacCu" />
+          <EntitySet Name="NhacCus" EntityType="Self.NhacCu" />
+          <EntitySet Name="NhaCungCaps" EntityType="Self.NhaCungCap" />
+          <EntitySet Name="NhanViens" EntityType="Self.NhanVien" />
+          <EntitySet Name="ThamSoes" EntityType="Self.ThamSo" />
+          <AssociationSet Name="FK__NhanVien__MaCV__30F848ED" Association="Self.FK__NhanVien__MaCV__30F848ED">
+            <End Role="ChucVu" EntitySet="ChucVus" />
+            <End Role="NhanVien" EntitySet="NhanViens" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CTHoaDon__MaHD__3A81B327" Association="Self.FK__CTHoaDon__MaHD__3A81B327">
+            <End Role="HoaDon" EntitySet="HoaDons" />
+            <End Role="CTHoaDon" EntitySet="CTHoaDons" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CTHoaDon__MaNC__3B75D760" Association="Self.FK__CTHoaDon__MaNC__3B75D760">
+            <End Role="NhacCu" EntitySet="NhacCus" />
+            <End Role="CTHoaDon" EntitySet="CTHoaDons" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NhacCu__MaHSX__2C3393D0" Association="Self.FK__NhacCu__MaHSX__2C3393D0">
+            <End Role="HangSanXuat" EntitySet="HangSanXuats" />
+            <End Role="NhacCu" EntitySet="NhacCus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HoaDon__MaKH__36B12243" Association="Self.FK__HoaDon__MaKH__36B12243">
+            <End Role="KhachHang" EntitySet="KhachHangs" />
+            <End Role="HoaDon" EntitySet="HoaDons" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HoaDon__MaNV__37A5467C" Association="Self.FK__HoaDon__MaNV__37A5467C">
+            <End Role="NhanVien" EntitySet="NhanViens" />
+            <End Role="HoaDon" EntitySet="HoaDons" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NhacCu__MaLoaiNC__2A4B4B5E" Association="Self.FK__NhacCu__MaLoaiNC__2A4B4B5E">
+            <End Role="LoaiNhacCu" EntitySet="LoaiNhacCus" />
+            <End Role="NhacCu" EntitySet="NhacCus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NhacCu__MaNCC__2B3F6F97" Association="Self.FK__NhacCu__MaNCC__2B3F6F97">
+            <End Role="NhaCungCap" EntitySet="NhaCungCaps" />
+            <End Role="NhacCu" EntitySet="NhacCus" />
+          </AssociationSet>
+          <FunctionImport Name="GetSalesReport" ReturnType="Collection(QLCHNCModel.GetSalesReport_Result)">
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="NhacCu_TimKiem">
+            <Parameter Name="MaNC" Mode="In" Type="String" />
+            <Parameter Name="TenNC" Mode="In" Type="String" />
+            <Parameter Name="ThoiGianBaoHanh" Mode="In" Type="String" />
+            <Parameter Name="DonGiaMin" Mode="In" Type="String" />
+            <Parameter Name="DonGiaMax" Mode="In" Type="String" />
+            <Parameter Name="MaLoaiNC" Mode="In" Type="String" />
+            <Parameter Name="MaNCC" Mode="In" Type="String" />
+            <Parameter Name="MaHSX" Mode="In" Type="String" />
+            <Parameter Name="SoLuong" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="NhaCungCap_TimKiem">
+            <Parameter Name="MaNCC" Mode="In" Type="String" />
+            <Parameter Name="TenNCC" Mode="In" Type="String" />
+            <Parameter Name="SDT" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="DiaChi" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="HangSanXuat_TimKiem">
+            <Parameter Name="MaHSX" Mode="In" Type="String" />
+            <Parameter Name="TenHSX" Mode="In" Type="String" />
+            <Parameter Name="DiaChi" Mode="In" Type="String" />
+            <Parameter Name="SDT" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="KhachHang_TimKiem">
+            <Parameter Name="MaKH" Mode="In" Type="String" />
+            <Parameter Name="HoTenKH" Mode="In" Type="String" />
+            <Parameter Name="SDT" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="DiaChi" Mode="In" Type="String" />
+            <Parameter Name="TaiKhoan" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="LoaiNhacCu_TimKiem">
+            <Parameter Name="MaLoaiNC" Mode="In" Type="String" />
+            <Parameter Name="TenLoaiNC" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="NhanVien_TimKiem">
+            <Parameter Name="MaNV" Mode="In" Type="String" />
+            <Parameter Name="HoTenNV" Mode="In" Type="String" />
+            <Parameter Name="SDT" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="DiaChi" Mode="In" Type="String" />
+            <Parameter Name="TenDN" Mode="In" Type="String" />
+            <Parameter Name="MaCV" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetSalesReport_Result">
+          <Property Type="String" Name="TenNC" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="MaNC" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="TenNCC" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="TenLoaiNC" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="TenHSX" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="TON" Nullable="false" />
+          <Property Type="Int32" Name="SoLuongBan" Nullable="true" />
+          <Property Type="Int32" Name="Gia" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QLCHNCModelStoreContainer" CdmEntityContainer="QLCHNCEntities">
+          <EntitySetMapping Name="ChucVus">
+            <EntityTypeMapping TypeName="QLCHNCModel.ChucVu">
+              <MappingFragment StoreEntitySet="ChucVu">
+                <ScalarProperty Name="MaCV" ColumnName="MaCV" />
+                <ScalarProperty Name="TenCV" ColumnName="TenCV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CTHoaDons">
+            <EntityTypeMapping TypeName="QLCHNCModel.CTHoaDon">
+              <MappingFragment StoreEntitySet="CTHoaDon">
+                <ScalarProperty Name="MaHD" ColumnName="MaHD" />
+                <ScalarProperty Name="MaNC" ColumnName="MaNC" />
+                <ScalarProperty Name="SoLuongBan" ColumnName="SoLuongBan" />
+                <ScalarProperty Name="DonGiaBan" ColumnName="DonGiaBan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HangSanXuats">
+            <EntityTypeMapping TypeName="QLCHNCModel.HangSanXuat">
+              <MappingFragment StoreEntitySet="HangSanXuat">
+                <ScalarProperty Name="MaHSX" ColumnName="MaHSX" />
+                <ScalarProperty Name="TenHSX" ColumnName="TenHSX" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HoaDons">
+            <EntityTypeMapping TypeName="QLCHNCModel.HoaDon">
+              <MappingFragment StoreEntitySet="HoaDon">
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="MaHD" ColumnName="MaHD" />
+                <ScalarProperty Name="NgayDH" ColumnName="NgayDH" />
+                <ScalarProperty Name="NgayGH" ColumnName="NgayGH" />
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="TinhTrangDuyet" ColumnName="TinhTrangDuyet" />
+                <ScalarProperty Name="TinhTrangDonHang" ColumnName="TinhTrangDonHang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KhachHangs">
+            <EntityTypeMapping TypeName="QLCHNCModel.KhachHang">
+              <MappingFragment StoreEntitySet="KhachHang">
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="HoTenKH" ColumnName="HoTenKH" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="TaiKhoan" ColumnName="TaiKhoan" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="AnhKH" ColumnName="AnhKH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoaiNhacCus">
+            <EntityTypeMapping TypeName="QLCHNCModel.LoaiNhacCu">
+              <MappingFragment StoreEntitySet="LoaiNhacCu">
+                <ScalarProperty Name="AnhLoaiNC" ColumnName="AnhLoaiNC" />
+                <ScalarProperty Name="MaLoaiNC" ColumnName="MaLoaiNC" />
+                <ScalarProperty Name="TenLoaiNC" ColumnName="TenLoaiNC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NhacCus">
+            <EntityTypeMapping TypeName="QLCHNCModel.NhacCu">
+              <MappingFragment StoreEntitySet="NhacCu">
+                <ScalarProperty Name="MaNC" ColumnName="MaNC" />
+                <ScalarProperty Name="TenNC" ColumnName="TenNC" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="AnhNC" ColumnName="AnhNC" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="ThoiGianBaoHanh" ColumnName="ThoiGianBaoHanh" />
+                <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+                <ScalarProperty Name="MaLoaiNC" ColumnName="MaLoaiNC" />
+                <ScalarProperty Name="MaNCC" ColumnName="MaNCC" />
+                <ScalarProperty Name="MaHSX" ColumnName="MaHSX" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NhaCungCaps">
+            <EntityTypeMapping TypeName="QLCHNCModel.NhaCungCap">
+              <MappingFragment StoreEntitySet="NhaCungCap">
+                <ScalarProperty Name="MaNCC" ColumnName="MaNCC" />
+                <ScalarProperty Name="TenNCC" ColumnName="TenNCC" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NhanViens">
+            <EntityTypeMapping TypeName="QLCHNCModel.NhanVien">
+              <MappingFragment StoreEntitySet="NhanVien">
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="HoTenNV" ColumnName="HoTenNV" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="TenDN" ColumnName="TenDN" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="MaCV" ColumnName="MaCV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ThamSoes">
+            <EntityTypeMapping TypeName="QLCHNCModel.ThamSo">
+              <MappingFragment StoreEntitySet="ThamSo">
+                <ScalarProperty Name="MaTS" ColumnName="MaTS" />
+                <ScalarProperty Name="TenTS" ColumnName="TenTS" />
+                <ScalarProperty Name="DVT" ColumnName="DVT" />
+                <ScalarProperty Name="GiaTri" ColumnName="GiaTri" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetSalesReport" FunctionName="QLCHNCModel.Store.GetSalesReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLCHNCModel.GetSalesReport_Result">
+                <ScalarProperty Name="TenNC" ColumnName="TenNC" />
+                <ScalarProperty Name="MaNC" ColumnName="MaNC" />
+                <ScalarProperty Name="TenNCC" ColumnName="TenNCC" />
+                <ScalarProperty Name="TenLoaiNC" ColumnName="TenLoaiNC" />
+                <ScalarProperty Name="TenHSX" ColumnName="TenHSX" />
+                <ScalarProperty Name="TON" ColumnName="TON" />
+                <ScalarProperty Name="SoLuongBan" ColumnName="SoLuongBan" />
+                <ScalarProperty Name="Gia" ColumnName="Gia" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="NhacCu_TimKiem" FunctionName="QLCHNCModel.Store.NhacCu_TimKiem" />
+          <FunctionImportMapping FunctionImportName="NhaCungCap_TimKiem" FunctionName="QLCHNCModel.Store.NhaCungCap_TimKiem" />
+          <FunctionImportMapping FunctionImportName="HangSanXuat_TimKiem" FunctionName="QLCHNCModel.Store.HangSanXuat_TimKiem" />
+          <FunctionImportMapping FunctionImportName="KhachHang_TimKiem" FunctionName="QLCHNCModel.Store.KhachHang_TimKiem" />
+          <FunctionImportMapping FunctionImportName="LoaiNhacCu_TimKiem" FunctionName="QLCHNCModel.Store.LoaiNhacCu_TimKiem" />
+          <FunctionImportMapping FunctionImportName="NhanVien_TimKiem" FunctionName="QLCHNCModel.Store.NhanVien_TimKiem" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

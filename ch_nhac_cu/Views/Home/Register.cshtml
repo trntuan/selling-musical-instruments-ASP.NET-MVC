@@ -1,0 +1,79 @@
+﻿@model ch_nhac_cu.Models.KhachHang
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+  
+}
+
+
+<!-- Breadcrumb Start -->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="breadcrumb bg-light mb-30">
+                <a class="breadcrumb-item text-dark" href="#">Trang chủ</a>
+                <span class="breadcrumb-item active">Đăng ký</span>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+<!-- Shop Detail Start -->
+<div class="container-fluid pb-5">
+    
+    <div class="row px-xl-5">
+        <div class="col">
+            <div class="bg-light p-30">
+                <div class="nav nav-tabs mb-4  flex-column align-content-center d-flex ">
+                    <h1>Tạo tài khoản</h1>
+                </div>
+                <div class="tab-content">
+
+                    <form method="post" action="@Url.Action("Register", "Home")" id="contact" >
+                          @Html.AntiForgeryToken()
+                        <div class="row flex-column align-content-center px-xl-3 d-flex">
+                  
+                            <div class="control-group w-25">
+                                <input name="HoTenKH" type="text" class="form-control" id="name" placeholder="Họ và tên *"
+                                       required="required" data-validation-required-message="Vui lòng nhập vào họ và tên của bạn" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="control-group w-25">
+                                <input name="Email" type="email" class="form-control" id="email" placeholder="Email *"
+                                       required="required" data-validation-required-message="Vui lòng nhập Email của bạn" />
+                                <p class="help-block text-danger">@ViewBag.error</p>
+                            </div>
+                            <div class="control-group w-25">
+                                <input name="MatKhau" type="password" class="form-control" id="pass" placeholder="Mật khẩu *"
+                                    minlength="7"  required="required" data-validation-required-message="Vui lòng nhập mật khẩu" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="control-group w-25">
+                                <input type="password" class="form-control" id="confirmPass" placeholder="Nhập lại mật khẩu *"
+                                     minlength="7"   required="required" data-validation-required-message="Vui lòng nhập lại mật khẩu" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <input value="Đăng ký" class="btn btn-primary py-2 px-4 w-25" type="submit" >
+
+
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScript validation
+    document.getElementById("contact").addEventListener("submit", function (event) {
+        var password = document.getElementById("pass").value;
+        var confirmPassword = document.getElementById("confirmPass").value;
+
+        if (password !== confirmPassword) {
+            alert("Mật khẩu và nhập lại mật khẩu không khớp.");
+            event.preventDefault(); // Ngăn chặn gửi form nếu mật khẩu không khớp
+        }
+    });
+</script>

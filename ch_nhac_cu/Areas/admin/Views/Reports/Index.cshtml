@@ -1,0 +1,289 @@
+﻿@model List<ch_nhac_cu.Models.SalesReportModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+    int i = 0;
+    int tong = 0;
+    int tongSoban = 0;
+    int iPrint = 0;
+}
+
+<style>
+    .table-responsive {
+        white-space: normal !important;
+    }
+
+    .dash-widget-info > span {
+        font-size: 19px;
+    }
+
+    .card-body {
+        line-height: 3;
+    }
+
+    .dash-widget-info {
+        text-align: center;
+    }
+
+    .form-control {
+        height: 50px;
+    }
+
+
+    .flex-right {
+        display: flex;
+        justify-content: left !important;
+    }
+</style>
+
+<!-- Page Header -->
+<div class="page-header">
+    <div class="row">
+        <div class="col">
+            <h3 class="page-title">Thống Kê</h3>
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item active">Thống Kê</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+<!-- /Page Header -->
+<!-- Search Filter -->
+@using (Html.BeginForm("Index", "Reports", FormMethod.Get))
+{
+    <div class="row form-group filter-row mb-4">
+        <div class="col-sm-4 col-md-4">
+            <label class="focus-label">Từ</label>
+            <input name="fromDate" class="form-control floating" value="@ViewBag.ValueFromDate" type="date">
+        </div>
+        <div class="col-sm-4 col-md-4">
+            <label class="focus-label" >Đến</label>
+            <input name="toDate" class="form-control floating" value="@ViewBag.ValueToDate" type="date">
+        </div>
+        <div class="col-sm-4 col-md-4 d-flex align-items-end">
+           
+            <input type="submit" name="submit" value="Tìm kiếm" class="btn btn-success btn-block" />
+        </div>
+    </div>
+}
+<!-- /Search Filter -->
+
+
+
+<div class="row">
+
+    <div class="col-auto ml-auto">
+        <button class="btn btn-warning" onclick="printContent()">In báo cáo</button>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table table-striped custom-table datatable mb-0">
+                <thead>
+                    <tr>
+                        <th class="underload">
+                            STT
+                        </th>
+                        <th class="underload">Tên nhạc cụ</th>
+                        <th class="underload">Mã nhạc cụ</th>
+                        <th class="underload">Nhà cung cấp</th>
+                        <th class="underload">Loại nhạc cụ</th>
+                        <th class="underload">Hãng sản xuất</th>
+                        <th>Đơn giá</th>
+                        <th>số lượng hiện tại</th>
+                        <th>số lượng đã bán</th>
+                        <th>Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @{i++; tong += item.Gia; tongSoban += item.SoLuongBan;}
+                                @i
+                            </td>
+                            <td>@item.TenNC</td>
+                            <td>@item.MaNC</td>
+                            <td>@item.TenNCC</td>
+                            <td>@item.TenLoaiNC</td>
+
+                            <td>@item.TenHSX</td>
+                            <td>@item.DonGia.ToString("#,##0")</td>
+                            <td>@item.TON</td>
+                            <td>@item.SoLuongBan</td>
+                            <td>@item.Gia.ToString("#,##0")</td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+        <div class="card dash-widget">
+            <div class="card-body">
+                <span class="dash-widget-icon"><i class="fa fa-cubes"></i></span>
+                <div class="dash-widget-info">
+
+                    <span>Số hàng hóa bán được: <b>@tongSoban</b> mặt hàng</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+        <div class="card dash-widget">
+            <div class="card-body">
+                <span class="dash-widget-icon"><i class="fa fa-usd"></i></span>
+                <div class="dash-widget-info">
+                    <span>Tổng tiền thu được: <b> @tong.ToString("#,##0")</b> VND</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="layoutPrint" id="printContent" style="display:none">
+    <!-- Nội dung bạn muốn in -->
+
+
+    <table id='tb_main_title' style='border-collapse: collapse;' name='tb_main_title' width='900' class=" table-print-title">
+        <tr>
+            <th style="text-align:left" class='left bold main_title'>
+                CÔNG TY SOL MUSIC
+            </th>
+        </tr>
+        <tr>
+            <th style="text-align: center; height: 35px" class='center bold main_title'>
+                BÁO CÁO DOANH SỐ BÁN HÀNG
+            </th>
+        </tr>
+        <tr>
+            <th style="font-style: italic; text-align: left;font-weight:400" class='left'>
+                Thời gian: @ViewBag.printFromDate đến @ViewBag.printToDate
+            </th>
+        </tr>
+    </table>
+    <br />
+    <table id='tb_main_body' style='border-collapse: collapse;' name='tb_main_body' width='900' class="table-print" border="1">
+        <tr>
+            <th>
+                STT
+            </th>
+
+            <th>Tên nhạc cụ</th>
+            <th class="center">Mã nhạc cụ</th>
+            <th class="center">Nhà cung cấp</th>
+            <th class="center">Loại nhạc cụ</th>
+            <th class="center">Hãng sản xuất</th>
+            <th>Đơn giá</th>
+            <th class="center">Còn lại</th>
+            <th class="center">Đã bán</th>
+            <th class="center">giá</th>
+        </tr>
+        <tbody>
+            <tr>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td style="text-align: center;">
+                        @{iPrint++;}
+                        @iPrint
+                    </td>
+                    <td class="center">@item.TenNC</td>
+                    <td>@item.MaNC</td>
+                    <td>@item.TenNCC</td>
+                    <td>@item.TenLoaiNC</td>
+                    <td>@item.TenHSX</td>
+                    <td>@item.DonGia.ToString("#,##0")</td>
+                    <td style="text-align: center;">@item.TON</td>
+                    <td style="text-align: center;">@item.SoLuongBan</td>
+                    <td class="center">@item.Gia.ToString("#,##0")</td>
+                </tr>
+
+            }
+                <tr>
+                <tr>
+                    <td class="center">
+                        Cộng
+                    </td>
+                    <td style="text-align: center;">X</td>
+                    <td style="text-align: center;">X</td>
+                    <td style="text-align: center;">X</td>
+                    <td style="text-align: center;">X</td>
+                    <td style="text-align: center;">X</td>
+                    <td style="text-align: center;">X</td>
+                    <td style="text-align: center;">X</td>
+                    <td style="text-align: center;">@tongSoban</td>
+                    <td style="text-align: center;">@tong.ToString("#,##0")</td>
+                </tr>
+
+
+            </tbody>
+
+        </table>
+        @{
+            var ngayIn = " ngày " + DateTime.Now.Day.ToString() + " tháng " + DateTime.Now.Month.ToString() + " năm " + DateTime.Now.Year.ToString();
+        }
+        <table id='tb_footer' name='tb_footer' width='900' class=" border-table fixheader">
+            <tr>
+                <td style="width:30%"></td>
+
+                <td style="width:30%"></td>
+
+                <td style="font-style: italic; text-align: center;">
+                    Khánh Hòa, @ngayIn
+            </tr>
+            <tr>
+
+                <td style="width:30%"></td>
+                <td style="width:30%"></td>
+                <td style=" text-align: center; font-weight: bold;">Người lập danh sách</td>
+            </tr>
+        </table>
+
+    </div>
+
+
+    <script>
+        function printContent() {
+            var content = document.getElementById("printContent").innerHTML;
+            var printWindow = window.open('', '_blank');
+            printWindow.document.open();
+            printWindow.document.write('<html><head><title>Print</title></head><body>');
+            printWindow.document.write(content);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
+            printWindow.close();
+        }
+    </script>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">Total Revenue</h3>
+                            <div id="bar-charts"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 text-center">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">Sales Overview</h3>
+                            <div id="line-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

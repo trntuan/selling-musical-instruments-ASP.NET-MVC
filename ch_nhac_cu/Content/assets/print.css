@@ -1,0 +1,119 @@
+div.layoutPrint h2 {
+    height: 2px;
+    margin: 0 !important;
+    page-break-after: always;
+}
+
+
+
+div.layoutPrint {
+    font-family: Arial;
+    font-size: 11px;
+    margin: 0px;
+    padding: 0px;
+}
+
+
+
+    div.layoutPrint table,
+    div.layoutPrint th,
+    div.layoutPrint td,
+    div.layoutPrint input,
+    div.layoutPrint textarea,
+    div.layoutPrint select,
+    div.layoutPrint button {
+        font-size: 11px;
+        margin: 0px auto !important;
+        border-collapse: collapse;
+    }
+
+        div.layoutPrint table.table-print,
+        div.layoutPrint table.table-print > th,
+        div.layoutPrint table.table-print > td {
+            border: 1px solid #111;
+            border-collapse: collapse;
+        }
+
+        div.layoutPrint table.table-print {
+            background: none;
+            border-collapse: collapse;
+        }
+
+            div.layoutPrint table.table-print th {
+                border-color: #aea4a4;
+            }
+
+            div.layoutPrint table.table-print td {
+                border-color: #aea4a4;
+            }
+
+                div.layoutPrint table.table-print td:last-child {
+                    border-right: 1px solid;
+                }
+
+
+    div.layoutPrint .underline {
+        text-decoration: underline;
+    }
+
+    div.layoutPrint .bold {
+        font-weight: bold;
+    }
+
+    div.layoutPrint .italic {
+        font-style: italic;
+    }
+
+    div.layoutPrint .main_title {
+        font-size: 125%;
+        text-transform: uppercase;
+    }
+
+    div.layoutPrint .sub_title {
+        font-size: 110%;
+    }
+
+    div.layoutPrint .table-print-title td {
+        padding: 1px;
+    }
+
+    div.layoutPrint .underline {
+        text-decoration: underline;
+    }
+
+    div.layoutPrint .overline {
+        text-decoration: overline;
+    }
+
+    div.layoutPrint table.table-border {
+        border: 5px solid #000 !important;
+    }
+
+
+    div.layoutPrint .left {
+        text-align: left !important;
+    }
+
+    div.layoutPrint .center {
+        text-align: center !important;
+    }
+
+    div.layoutPrint .right {
+        text-align: right !important;
+    }
+
+    div.layoutPrint .justify {
+        text-align: justify !important;
+    }
+
+    div.layoutPrint .border-table {
+        border: 0 !important;
+    }
+
+    div.layoutPrint .with30 {
+        width: 30%;
+    }
+
+    div.layoutPrint .width700 {
+        width: 700px;
+    }

@@ -1,0 +1,226 @@
+﻿@model ch_nhac_cu.Models.HomeModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+
+<!-- Carousel Start -->
+<div class="container-fluid mb-3">
+    <div class="row px-xl-12">
+        <div class="col-lg-12">
+            <div id="header-carousel" class="carousel slide carousel-fade mb-30 mb-lg-0" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#header-carousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#header-carousel" data-slide-to="1"></li>
+                    <li data-target="#header-carousel" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item position-relative active" style="height: 430px;">
+                        <img class="position-absolute w-100 h-100" src="~/Content/userAssets/img/carousel-1.jpg" style="object-fit: cover;">
+                        <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                            <div class="p-3" style="max-width: 700px;">
+                                <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Đàn guitar</h1>
+                                <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Chúng tôi cung cấp các loại Guitar chất lượng từ các nhà sản xuất uy tín</p>
+                                <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Mua ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item position-relative" style="height: 430px;">
+                        <img class="position-absolute w-100 h-100" src="~/Content/userAssets/img/carousel-2.jpg" style="object-fit: cover;">
+                        <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                            <div class="p-3" style="max-width: 700px;">
+                                <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Linh kiện</h1>
+                                <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Chúng tôi cam kết cung cấp linh kiện chất lượng từ các nhà sản xuất đáng tin cậy</p>
+                                <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Mua ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item position-relative" style="height: 430px;">
+                        <img class="position-absolute w-100 h-100" src="~/Content/userAssets/img/carousel-3.jpg" style="object-fit: cover;">
+                        <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                            <div class="p-3" style="max-width: 700px;">
+                                <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Đàn piano</h1>
+                                <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Chúng tôi mang đến cho bạn sự lựa chọn đa dạng với các mẫu Piano từ các thương hiệu hàng đầu</p>
+                                <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Mua ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Carousel End -->
+<!-- Featured Start -->
+<div class="container-fluid pt-5">
+    <div class="row px-xl-5 pb-3">
+        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+            <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
+                <h1 class="fa fa-check text-primary m-0 mr-3"></h1>
+                <h5 class="font-weight-semi-bold m-0">Sản phẩm chất lượng</h5>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+            <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
+                <h1 class="fa fa-shipping-fast text-primary m-0 mr-2"></h1>
+                <h5 class="font-weight-semi-bold m-0">Miễn phí vận chuyển</h5>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+            <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
+                <h1 class="fas fa-exchange-alt text-primary m-0 mr-3"></h1>
+                <h5 class="font-weight-semi-bold m-0">Đổi Trả trong 14 ngày</h5>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+            <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
+                <h1 class="fa fa-phone-volume text-primary m-0 mr-3"></h1>
+                <h5 class="font-weight-semi-bold m-0">Hỗ trợ 24/7</h5>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Featured End -->
+<!-- Categories Start -->
+<div class="container-fluid pt-5">
+    <div class="row px-xl-3 d-flex justify-content-between pb-1">
+        <h2 class=" text-uppercase mx-xl-5 mb-4"><span class="title-sub"></span> <span class="bg-secondary pr-3">Danh mục sản phẩm</span></h2>
+        <a href="@Url.Action("TimKiemNhacCu", "Category")"
+           class="title-view-all text-uppercase pt-4 mx-xl-5">Xem tất cả<i class="fas fa-long-arrow-alt-right"></i></a>
+    </div>
+    <div class="row px-xl-5 pb-3">
+        @{
+            var danhSachLoaiNhacCus = from loaiNC in Model.LoaiNhacCus
+                                      join nc in Model.NhacCus
+                                      on loaiNC.MaLoaiNC equals nc.MaLoaiNC into nhacCus
+                                      select new { LoaiNhacCu = loaiNC, AnhLoaiNC = loaiNC.AnhLoaiNC, MaLoai = loaiNC.MaLoaiNC, SoLuong = nhacCus.Sum(nc => nc.SoLuong) };
+        }
+
+        @foreach (var item in danhSachLoaiNhacCus)
+        {
+            
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <form  method="get"  class="text-decoration-none" action="@Url.Action("TimKiemNhacCu", "Category")">
+                    <div class="cat-item d-flex align-items-center mb-4">
+                        <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                            <img class="img-fluid" src="~/Content/assets/img/LoaiNC/@item.AnhLoaiNC" alt="">
+                        </div>
+                        <div class="flex-fill pl-3">
+                            <h6>   <input style="border: none;background-color:#fff"  type="submit" value="@item.LoaiNhacCu.TenLoaiNC" class="nav-item nav-link"> </h6>
+
+                            <input style="display:none" type="text" name="MaLoaiNC" value="@item.LoaiNhacCu.MaLoaiNC" />
+                            <small class="text-body">@item.SoLuong sản phẩm</small>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        }
+
+
+
+
+
+    </div>
+</div>
+<!-- Categories End -->
+<!-- Products Start -->
+<div class="container-fluid pt-5 pb-3">
+    <div class="row px-xl-3 d-flex justify-content-between pb-1">
+        <h2 class=" text-uppercase mx-xl-5 mb-4"><span class="title-sub"></span> <span class="bg-secondary pr-3">Sản phẩm mới</span></h2>
+        <a href="@Url.Action("TimKiemNhacCu", "Category")"
+           class="title-view-all text-uppercase pt-4 mx-xl-5">Xem tất cả<i class="fas fa-long-arrow-alt-right"></i></a>
+    </div>
+
+    <div class="row px-xl-5">
+        @foreach (var item in Model.NhacCus.OrderByDescending(x => x.MaNC.Length >= 3 ? int.Parse(x.MaNC.Substring(x.MaNC.Length - 3)) : 0).Take(8)
+)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <div class="product-item bg-light mb-4">
+                    <div class="product-img position-relative overflow-hidden item-height">
+                        <img class="img-fluid w-100 h-100" src="~/Content/assets/img/NhacCu/@item.AnhNC" alt="">
+                        <div class="product-action">
+                            <a class="btn btn-outline-dark btn-square add-to-cart-btn" href="#" data-product-id="@item.MaNC"><i class="fa fa-shopping-cart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="@Url.Action("Details", "Product", new { Id = item.MaNC })"><i class="fa fa-search"></i></a>
+                        </div>
+                    </div>
+                    <div class="text-center py-4 item-height-150">
+                        <a class="h6 text-decoration-none d-block" href="@Url.Action("Details", "Product", new { Id = item.MaNC })">@item.TenNC</a>
+                        <div class="d-flex align-items-center justify-content-center mt-2">
+                            <h5 class="text-danger"> @item.DonGia.ToString("#,##0") đ</h5><h6 class="text-muted ml-2"><del> @{ decimal Gia = item.DonGia * 1.1M;} @Gia.ToString("#,##0") đ</del></h6>
+                        </div>
+                        @*<div class="d-flex align-items-center justify-content-center mb-1">
+                            <small>Còn lại @item.SoLuong sản phẩm</small>
+                        </div>*@
+                    </div>
+                </div>
+            </div>
+
+        }
+
+
+
+    </div>
+</div>
+<!-- Products End -->
+<!-- Products Start -->
+<div class="container-fluid pt-5 pb-3">
+    <div class="row px-xl-3 d-flex justify-content-between pb-1">
+        <h2 class=" text-uppercase mx-xl-5 mb-4"><span class="title-sub"></span> <span class="bg-secondary pr-3">Sản phẩm bán chạy</span></h2>
+        <a href="@Url.Action("TimKiemNhacCu", "Category")"
+           class="title-view-all text-uppercase pt-4 mx-xl-5">Xem tất cả<i class="fas fa-long-arrow-alt-right"></i></a>
+    </div>
+    <div class="row px-xl-5">
+
+        @{
+            var danhSachSanPhamBanChay = from nc in Model.NhacCus
+                                         join cthd in Model.CTHoaDons
+                                         on nc.MaNC equals cthd.MaNC
+                                         group cthd by new { nc.MaNC, nc.TenNC, nc.AnhNC, nc.DonGia, nc.SoLuong } into gr
+                                         orderby gr.Sum(cthd => cthd.SoLuongBan) descending
+                                         select new
+                                         {
+                                             gr.Key.MaNC,
+                                             gr.Key.TenNC,
+                                             gr.Key.AnhNC,
+                                             gr.Key.DonGia,
+                                             gr.Key.SoLuong,
+                                             TongSoLuongBan = gr.Sum(cthd => cthd.SoLuongBan)
+                                         };
+        }
+
+
+
+        @foreach (var item in danhSachSanPhamBanChay.Take(4))
+        {
+
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <div class="product-item bg-light mb-4">
+                    <div class="product-img position-relative overflow-hidden item-height">
+                        <img class="img-fluid w-100 h-100" src="~/Content/assets/img/NhacCu/@item.AnhNC" alt="">
+                        <div class="product-action">
+                            <a class="btn btn-outline-dark btn-square add-to-cart-btn" href="#" data-product-id="@item.MaNC"><i class="fa fa-shopping-cart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="@Url.Action("Details", "Product", new { Id = item.MaNC })"><i class="fa fa-search"></i></a>
+                        </div>
+                    </div>
+                    <div class="text-center py-4 item-height-150">
+                        <a class="h6 text-decoration-none d-block" href="@Url.Action("Details", "Product", new { Id = item.MaNC })">@item.TenNC</a>
+                        <div class="d-flex align-items-center justify-content-center mt-2">
+                            <h5 class="text-danger"> @item.DonGia.ToString("#,##0") đ</h5><h6 class="text-muted ml-2"><del> @{ decimal Gia = item.DonGia * 1.1M;} @Gia.ToString("#,##0") đ</del></h6>
+                        </div>
+                        <!--<div class="d-flex align-items-center justify-content-center mb-1">
+                            <small>-->@*Còn lại @item.SoLuong sản phẩm*@<!--</small>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        }
+
+
+    </div>
+</div>
+        
+<!-- Products End -->

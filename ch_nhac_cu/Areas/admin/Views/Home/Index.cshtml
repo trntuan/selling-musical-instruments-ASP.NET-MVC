@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    .text-title {
+        font-size: 28px!important;
+      color:#317597;
+    }
+
+    .dash-widget-info {
+        height: 59px!important;
+        text-align: center!important;
+    }
+</style>
+
+<!-- Page Header -->
+<div class="page-header">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3 class="page-title">Welcome Admin!</h3>
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item active">Dashboard</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- /Page Header -->
+
+<div class="row  justify-content-center">
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
+        <a href="@Url.Action("Index", "NhanViens")">
+            <div class="card dash-widget">
+                <div class="card-body">
+                    <span class="dash-widget-icon"><i class="fa fa-user"></i></span>
+                    <div class="dash-widget-info">
+                        <h3 class="text-title">Quản lý thông tin nhân viên</h3>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
+        <a href="@Url.Action("Index", "KhachHangs")">
+            <div class="card dash-widget">
+                <div class="card-body">
+                    <span class="dash-widget-icon"><i class="fa fa-user"></i></span>
+                    <div class="dash-widget-info">
+                        <h3 class="text-title">Quản lý thông tin khách hàng</h3>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
+        <a href="@Url.Action("Index", "Bills")">
+            <div class="card dash-widget">
+                <div class="card-body">
+                    <span class="dash-widget-icon"><i class="fa fa-usd"></i></span>
+                    <div class="dash-widget-info">
+                        <h3 class="text-title">Quản lý hóa đơn</h3>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
+        <a href="@Url.Action("Index", "NhacCus")">
+            <div class="card dash-widget">
+                <div class="card-body">
+                    <span class="dash-widget-icon"><i class="fa fa-cubes"></i></span>
+                    <div class="dash-widget-info">
+                        <h3 class="text-title">Quản lý sản phẩm</h3>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
+        <a href="@Url.Action("Index", "Reports")">
+            <div class="card dash-widget">
+                <div class="card-body">
+                    <span class="dash-widget-icon"><i class="fa fa-pie-chart"></i></span>
+                    <div class="dash-widget-info">
+                        <h3 class="text-title">Thống kê</h3>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+ 
+</div>
+

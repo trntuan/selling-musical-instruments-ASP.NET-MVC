@@ -1,0 +1,94 @@
+﻿@model ch_nhac_cu.Models.NhacCu
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="page-header ">
+    <div class="row align-items-center justify-content-center >
+        <div class="col ">
+            <h3 class="page-title">Chi tiết sản phẩm</h3>
+        </div>
+
+    </div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenNC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenNC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MoTa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoTa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnhNC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AnhNC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThoiGianBaoHanh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThoiGianBaoHanh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DonGia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DonGia)
+        </dd>
+
+        <dt>
+            Hãng sản xuất
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HangSanXuat.TenHSX)
+        </dd>
+
+        <dt>
+            Tên loại nhạc cụ
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiNhacCu.TenLoaiNC)
+        </dd>
+
+        <dt>
+            Nhà cung cấp
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NhaCungCap.TenNCC)
+        </dd>
+
+    </dl>
+</div>
+<div class="submit-section">
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaNC }, new { @class = "btn btn-success submit-btn" }) &nbsp;
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary submit-btn m-r-10" })
+</div>
+

@@ -1,0 +1,79 @@
+﻿@model ch_nhac_cu.Models.NhanVien
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="page-header ">
+    <div class="row align-items-center justify-content-center >
+        <div class="col ">
+            <h3 class="page-title">Chi tiết thông tin nhân viên</h3>
+        </div>
+
+    </div>
+
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.HoTenNV)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HoTenNV)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SDT)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SDT)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DiaChi)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DiaChi)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TenDN)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TenDN)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MatKhau)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MatKhau)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ChucVu.TenCV)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ChucVu.TenCV)
+            </dd>
+
+        </dl>
+    </div>
+    <div class="submit-section">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.MaNV }, new { @class = "btn btn-success submit-btn" }) &nbsp;
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary submit-btn m-r-10" })
+    </div>

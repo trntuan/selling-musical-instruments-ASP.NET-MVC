@@ -1,0 +1,208 @@
+﻿@model ch_nhac_cu.Models.NhacCu
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+
+
+
+<script>
+    var modelId = '@Model.MaNC'; // Tạo biến JavaScript từ giá trị Razor
+</script>
+<!-- quantityall Javascript -->
+<script src="~/Content/userAssets/js/quantity.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#addtocart").click(function () {
+            var model = {};
+            //lấy id sản phẩm
+            model.Id = modelId ;
+            // lấy số lượng đặt hàng
+            model.Quantity = $("#ipQuantity").val();
+            debugger;
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddToCart", "Cart")',
+                data:  JSON.stringify(model) ,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    alert("Thêm giỏ hàng thành công!")
+                    @*$('#CartCount').text(  @Session["count"] + 1);*@
+                },
+                error: function () {
+                    alert("Lỗi trong khi thêm vào giỏ hàng!");
+                }
+            });
+            return false;
+        });
+    });
+</script>
+
+@{
+    var SPdeXuat = Session["SPdeXuat"] as List<ch_nhac_cu.Models.NhacCu>;
+    if (SPdeXuat != null)
+    {
+        // Sử dụng danh sách
+        ViewBag.SPdeXuat = SPdeXuat.Where(x => x.LoaiNhacCu.MaLoaiNC == Model.LoaiNhacCu.MaLoaiNC).Take(4);
+    }
+}
+
+<!-- Breadcrumb Start -->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="breadcrumb bg-light mb-30">
+                <a class="breadcrumb-item text-dark" href="#">Trang chủ</a>
+                <a class="breadcrumb-item text-dark" href="#">Sản phẩm</a>
+                <span class="breadcrumb-item active">Chi tiết</span>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+<!-- Shop Detail Start -->
+<div class="container-fluid pb-5">
+    <div class="row px-xl-5">
+        <div class="col-lg-5 mb-30">
+            <div id="product-carousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner bg-light">
+                    <div class="carousel-item active">
+                        <img class="w-100 h-100" src="~/Content/assets/img/NhacCu/@Model.AnhNC" alt="Image">
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-7 h-auto mb-30">
+            <div class="h-100 bg-light p-30">
+                <h3>@Model.TenNC</h3>
+                @*<div class="d-flex mb-3">
+
+                    <small class="pt-1">Còn lại @Model.SoLuong sản phẩm</small>
+                </div>*@
+                <h3 class="font-weight-semi-bold mb-4">
+                    <h5 class="text-danger"> @Model.DonGia.ToString("#,##0") đ</h5>
+                    <h6 class="text-muted ml-2">
+                        <del> @{ decimal Gia = Model.DonGia * 1.1M;} @Gia.ToString("#,##0") đ</del>
+                    </h6>
+                </h3>
+                <div class="d-flex">
+                    <strong class="text-dark mr-3">Loại nhạc cụ:</strong>
+                    @Model.LoaiNhacCu.TenLoaiNC
+                </div>
+                <div class="d-flex">
+                    <strong class="text-dark mr-3">Hãng sản xuất:</strong>
+                    @Model.HangSanXuat.TenHSX
+                </div>
+                <div class="d-flex">
+                    <strong class="text-dark mr-3">Nhà cung cấp:</strong>
+                    @Model.NhaCungCap.TenNCC
+                </div>
+                <div class="d-flex mb-3">
+                    <strong class="text-dark mr-3">cam kết bảo hành trong vòng:</strong>
+                    @Model.ThoiGianBaoHanh
+                </div>
+                <div class="d-flex align-items-center mb-4 pt-2">
+                    <div class="input-group quantity mr-3" style="width: 130px;">
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary btn-minus">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                        <input type="text" id="ipQuantity" class="form-control bg-secondary border-0 text-center" value="1">
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary btn-plus">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <a href="#" id="addtocart" class="btn btn-primary px-3">
+                        <i class="fa fa-shopping-cart mr-1"></i> Thêm vào giỏ
+                    </a>
+
+                </div>
+                <div class="d-flex pt-2">
+                    <strong class="text-dark mr-2">Share on:</strong>
+                    <div class="d-inline-flex">
+                        <a class="text-dark px-2" href="">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a class="text-dark px-2" href="">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a class="text-dark px-2" href="">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a class="text-dark px-2" href="">
+                            <i class="fab fa-pinterest"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row px-xl-5">
+        <div class="col">
+            <div class="bg-light p-30">
+                <div class="nav nav-tabs mb-4">
+                    <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Mô tả</a>
+
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="tab-pane-1">
+                        <h4 class="mb-3">Đặc điểm nổi bật của @Model.TenNC</h4>
+                        <p>@Model.MoTa</p>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Shop Detail End -->
+<!-- Products Start -->
+<div class="container-fluid py-5">
+    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Sản phẩm cùng loại</span></h2>
+    <div class="row px-xl-5">
+        @if (ViewBag.SPdeXuat != null)
+        {
+            foreach (var item in ViewBag.SPdeXuat)
+            {
+                if (item.AnhNC != null && item.MaNC != null && item.SoLuong != null && item.DonGia != null)
+                {
+
+                    <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                        <div class="product-item bg-light mb-4">
+                            <div class="product-img position-relative overflow-hidden item-height">
+                                <img class="img-fluid w-100 h-100" src="~/Content/assets/img/NhacCu/@item.AnhNC" alt="">
+                                <div class="product-action">
+                                    <a class="btn btn-outline-dark btn-square add-to-cart-btn" href="#" data-product-id="@item.MaNC"><i class="fa fa-shopping-cart"></i></a>
+                                    <a class="btn btn-outline-dark btn-square" href="@Url.Action("Details", "Product", new { Id = item.MaNC })"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                            <div class="text-center py-4 item-height-150">
+                                <a class="h6 text-decoration-none d-block" href="@Url.Action("Details", "Product", new { Id = item.MaNC })">@item.TenNC</a>
+                                <div class="d-flex align-items-center justify-content-center mt-2">
+                                    <h5 class="text-danger"> @item.DonGia.ToString("#,##0") đ</h5><h6 class="text-muted ml-2"><del> @{ decimal Gianc = item.DonGia * 1.1M;} @Gianc.ToString("#,##0") đ</del></h6>
+                                </div>
+                                @*<div class="d-flex align-items-center justify-content-center mb-1">
+                                    <small>Còn lại @item.SoLuong sản phẩm</small>
+                                </div>*@
+                            </div>
+                        </div>
+                    </div>
+
+
+                }
+            }
+        }
+    </div>
+
+</div>
+<!-- Products End -->

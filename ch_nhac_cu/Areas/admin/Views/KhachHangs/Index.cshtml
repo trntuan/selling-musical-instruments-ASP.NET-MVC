@@ -1,0 +1,137 @@
+﻿@model IEnumerable<ch_nhac_cu.Models.KhachHang>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+    int i = 0;
+}
+<!-- Page Header -->
+@using (Html.BeginForm("Index", "KhachHangs", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Quản lý khách hàng</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Khách hàng</a></li>
+                    <li class="breadcrumb-item active">Quản lý khách hàng</li>
+                </ul>
+            </div>
+            @*<div class="col-auto float-right ml-auto">
+                    <a href="@Url.Action("Create", "KhachHangs")" class="btn add-btn"><i class="fa fa-plus"></i> Thêm khách hàng</a>
+                </div>*@
+        </div>
+    </div>
+    <div class="row filter-row justify-content-center ">
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12">
+            <div class="form-group form-focus">
+                <input type="text" class="form-control floating" name="MaKH" value="@ViewBag.MaKH">
+                <label class="focus-label">Mã khách hàng</label>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12">
+            <div class="form-group form-focus">
+                <input type="text" class="form-control floating" name="HoTenKH" value="@ViewBag.HoTenKH">
+                <label class="focus-label"> Họ tên khách hàng</label>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12">
+            <div class="form-group form-focus">
+                <input type="text" class="form-control floating" name="SDT" value="@ViewBag.SDT">
+                <label class="focus-label">Số điện thoại</label>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12">
+            <div class="form-group form-focus">
+                <input type="text" class="form-control floating" name="Email" value="@ViewBag.Email">
+                <label class="focus-label">Email</label>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12">
+            <div class="form-group form-focus">
+                <input type="text" class="form-control floating" name="DiaChi" value="@ViewBag.DiaChi">
+                <label class="focus-label">Địa chỉ</label>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12">
+            <div class="form-group form-focus">
+                <input type="text" class="form-control floating" name="TaiKhoan" value="@ViewBag.TaiKhoan">
+                <label class="focus-label">Tài khoản </label>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
+            <input type="submit" name="submit" value="Tìm kiếm" class="btn btn-success btn-block" />
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
+            <a href="@Url.Action("Index", "KhachHangs/Index")" class="btn btn-info btn-block"> Nhập mới </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive: nowrap">
+                <table class="table table-striped custom-table datatable mb-0">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã KH</th>
+                            <th>Họ tên</th>
+                            @*<th class="underload text-center ">Ảnh </th>*@
+                            <th>SDT</th>
+                            <th class="text-center ">Email</th>
+                            <th class="underload">Địa chỉ</th>
+                            <th>Tài khoản</th>
+          
+                            <th class="text-right no-sort underload">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @{ i++;}
+                                    @i
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MaKH)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.HoTenKH)
+                                </td>
+                                @*<td class="text-center ">
+                                    <img style="border-radius:14%; width:60%; height: auto" src="~/Content/assets/img/KhachHang/@item.AnhKH" class=" border border-light" alt="your image">
+                                </td>*@
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SDT)
+                                </td>
+                                <td class="text-center ">
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DiaChi)
+                                </td>
+          
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TaiKhoan)
+                                </td>
+
+                                <td class="text-right">
+                                    <div class="dropdown dropdown-action">
+                                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="@Url.Action("Edit", new { id = item.MaKH })"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                            <a class="dropdown-item" href="@Url.Action("Details", new { id = item.MaKH })"><i class="fa fa-eye m-r-5"></i> View</a>
+                                            <a class="dropdown-item" href="@Url.Action("Delete", new { id = item.MaKH })"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+ }

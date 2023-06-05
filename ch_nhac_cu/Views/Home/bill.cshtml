@@ -1,0 +1,102 @@
+﻿@model IEnumerable<ch_nhac_cu.Models.HoaDon>
+@{
+    ViewBag.Title = "bill";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<script type="text/javascript" src="~/Content/userAssets/js/paginate.js"></script>
+
+<!-- Breadcrumb Start -->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="breadcrumb bg-light mb-30">
+                <a class="breadcrumb-item text-dark" href="#">Trang chủ</a>
+                <span class="breadcrumb-item active">Thông tin hóa đơn</span>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+
+
+<div class="container-fluid  px-xl-5 pb-5">
+    <div class="row px-xl-5">
+        <div class="panel">
+            <div class="body">
+                <div class="input-group">
+
+                    <input class="form-control" type="search" id="searchBox" placeholder="Thông tin bất kì...">
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="row px-xl-5">
+
+            <div class="col">
+                <table class="myTable table table-border table hover">
+                    <tbody>
+                        <tr>
+                            <th class="underload">Mã hóa đơn </th>
+                            <th>Ngày đặt</th>
+                            <th>Ngày giao</th>
+                            <th>Trạng thái đơn hàng</th>
+                            <th>Tổng tiền</th>
+
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.MaHD)</td>
+                                <td> @Convert.ToDateTime(item.NgayDH).ToString("dd/MM/yyyy")</td>
+                                <td>
+                                    @Convert.ToDateTime(item.NgayDH).ToString("dd/MM/yyyy")
+                                </td>
+                                @{if (item.TinhTrangDuyet == true)
+                                    { 
+                                    if (item.TinhTrangDuyet == true && item.TinhTrangDonHang == false)
+                                        {
+                                                <td><span class="text-success">Đã duyệt</span></td>
+                                         }
+                                        if (item.TinhTrangDonHang == true)
+                                        {
+                                            <td><span class="text-success">Đã giao</span></td>
+                                        }
+                                        else
+                                        {
+                                            <td><span class="text-danger">Thất bại</span></td>
+                                        }
+                                    
+                                    }
+                                else
+                                {
+                                <td><span class="text-danger">Chưa duyệt</span></td>
+                                }
+                                }
+
+                                <td><span class="text-info">@Convert.ToInt64(@item.TongTien).ToString("#,##0") đ</span></td>
+
+
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        let options = {
+            numberPerPage: 5, //Cantidad de datos por pagina
+            goBar: true, //Barra donde puedes digitar el numero de la pagina al que quiere ir
+            pageCounter: true, //Contador de paginas, en cual estas, de cuantas paginas
+        };
+
+        let filterOptions = {
+            el: '#searchBox' //Caja de texto para filtrar, puede ser una clase o un ID
+        };
+
+        paginate.init('.myTable', options, filterOptions);
+    </script>
